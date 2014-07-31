@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Send message to {{chat_id}}</title>
+    <title>Send message to {{chat.name}}</title>
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='askbot.js') }}"></script>
 </head>
 <body>
 
 <div class="container">
-    <form class="form-horizontal" action="/message/{{chat_id}}/" method="post">
+    <form class="form-horizontal" action="/message/{{chat.id}}/" method="post">
         <fieldset>
-            <legend>Send message to <strong>{{chat_id}}</strong></legend>
+            <legend>Send message to <strong>{{chat.name}}</strong></legend>
             <div class="control-group">
                 <label class="control-label" for="message">Message text</label>
 
@@ -23,7 +25,7 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="btn">Send</button>
+                    <button type="submit" class="btn" id="send_btn">Send</button>
                 </div>
             </div>
         </fieldset>

@@ -148,8 +148,8 @@ def chats_post():
     return render_template('chats.html', chats=chats, shared_secret=shared_secret)
 
 
-@server.route("/chat_message/<string:shared_secret>/<string:chat_id>/", methods=['GET'])
-def chat_messages(shared_secret, chat_id):
+@server.route("/chat_message/<string:shared_secret>/<string:chat_id>/<string:chat_name>/", methods=['GET'])
+def chat_messages(shared_secret, chat_id, chat_name):
     """
     A view to send a test message to a chat.
     """
@@ -158,7 +158,11 @@ def chat_messages(shared_secret, chat_id):
     if shared_secret != settings.SHARED_SECRET:
         return "Bad shared secret", 403, {"Content-type": "text/plain"}
 
-    return render_template('chat_message.html', chat_id=chat_id, shared_secret=shared_secret)
+    chat = {}
+    chat['id'] = chat_id
+    chat['name'] = chat_name
+
+    return render_template('chat_message.html', chat=chat, shared_secret=shared_secret)
 
 
 @server.before_request
